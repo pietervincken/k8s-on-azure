@@ -16,3 +16,4 @@ configMapGenerator:
     files:
       - patches/kaniko-azureidentity.yaml
       - patches/kaniko-azureidentitybinding.yaml
+    behavior: merge
