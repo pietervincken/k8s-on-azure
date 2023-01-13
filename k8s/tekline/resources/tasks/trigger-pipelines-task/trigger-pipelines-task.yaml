@@ -1,0 +1,59 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: trigger-pipelines
+spec:
+  params:
+    - name: namespace
+    - name: git-url
+    - name: git-revision
+    - name: git-repository-name
+    - name: git-push-user-email
+  steps:
+    - name: trigger-pipelineruns
+      image: docker.io/joyrex2001/tekline:latest
+      volumeMounts:
+        - name: scripts
+          mountPath: /scripts
+      script: |
+        #!/bin/sh
+        set -euxo pipefail
+
+        namespace=$(params.namespace)
+        for pipeline in $(kubectl get pipeline -l tekline.pietervincken.com/skip!=true -o=name -n ${namespace})
+        do {
+
+          echo "Evaluating: $pipeline"
+          kubectl get ${pipeline} -n ${namespace} -o json > /tmp/pipeline-json
+
+          regex_match=$(cat /tmp/pipeline-json | jq --raw-output '.metadata.annotations["tekline.pietervincken.com/run-regex"]')
+          regex_skip=$(cat /tmp/pipeline-json | jq --raw-output '.metadata.annotations["tekline.pietervincken.com/skip-regex"]')
+
+          if [[ $regex_skip != "null" ]] && echo $revision | grep -qE "$regex_skip" 
+          then
+              echo "Skipping pipeline $pipeline due to matched skip regex: $regex_skip"
+              continue
+          fi
+
+          if [[ $regex_match != "null" ]] && echo $revision | (! grep -qE "$regex_match")
+          then
+              echo "Skipping pipeline $pipeline due to missing match to run regex: $regex_match"
+              continue
+          fi
+
+          base_pipeline=$(basename ${pipeline})
+
+          tkn pipeline start ${base_pipeline}                                  \
+                    --pod-template /scripts/pod-template.yaml                             \
+                    -w name=workspace,volumeClaimTemplateFile=/scripts/pvc-template.yaml  \
+                    -p git-url=$(params.git-url)                          \
+                    -p git-revision=$(params.git-revision)                \
+                    -p git-repository-name=$(params.git-repository-name)  \
+                    -p git-push-user-email=$(params.git-push-user-email)  \
+                    -s tekline                                            \
+                    -n $(params.namespace)
+        } done
+  volumes:
+    - name: scripts
+      configMap:
+        name: trigger-pipelines-scripts
