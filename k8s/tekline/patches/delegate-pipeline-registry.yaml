@@ -1,0 +1,3 @@
+- op: add
+  path: /spec/params/4/default
+  value: renovatetalkacr.azurecr.io

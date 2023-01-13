@@ -33,3 +33,7 @@ output "keyvault" {
 output "rg_runtime" {
   value = azurerm_resource_group.rg.name
 }
+
+output "nameserver" {
+  value = azurerm_dns_zone.domain.name_servers
+}

@@ -16,7 +16,7 @@ kubectl apply -k k8s/external-secrets-operator # first attempt will fail due to 
 kubectl wait deployment -n external-secrets external-secrets-webhook --for condition=Available=True --timeout=120s
 kubectl apply -k k8s/external-secrets-operator
 
-kubectl apply -k k8s/argocd # first attempt will fail due to missing crds
-kubectl apply -k k8s/argocd
+kubectl apply -k ../renovate-tekton-argo-talk/k8s/argocd # first attempt will fail due to missing crds
+kubectl apply -k ../renovate-tekton-argo-talk/k8s/argocd
 
 kubectl apply -k k8s/argocdapps

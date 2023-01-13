@@ -1,22 +1,18 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-components:
-  - "kustomizeconfig"
-
 resources:
-  - resources/delegate-rbac.yaml
-  - resources/github-eventlistener.yaml
-  - resources/github-trigger-ingress.yaml
-  - resources/github-trigger-rbac.yaml
-  - resources/github-triggerbinding.yaml
-  - resources/github-triggertemplate.yaml
-  - resources/ns.yaml
-  - resources/pipelines/delegate-pipeline.yaml
-  - resources/tasks/apply-tekton-task.yaml
-  - resources/tasks/create-namespace-task
-  - resources/tasks/trigger-pipelines-task
-  - secrets/github-clone-external-secret.yaml
-  - secrets/github-trigger-external-secret.yaml
+  - https://github.com/pietervincken/renovate-tekton-argo-talk.git//k8s/tekline?ref=main
 
-namespace: tekline
+patches:
+  - target:
+      name: delegate-pipeline
+      kind: Pipeline
+      group: tekton.dev
+    path: patches/delegate-pipeline-registry.yaml
+
+configMapGenerator:
+  - name: create-namespace-resources
+    files:
+      - kaniko-azureidentity.yaml
+      - kaniko-azureidentitybinding.yaml

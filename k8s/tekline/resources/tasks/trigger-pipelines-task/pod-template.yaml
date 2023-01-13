@@ -1,2 +1,0 @@
-securityContext:
-  fsGroup: 1001

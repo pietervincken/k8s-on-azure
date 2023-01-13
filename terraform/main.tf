@@ -222,3 +222,4 @@ resource "azurerm_role_assignment" "kaniko_to_acr" {
   role_definition_name = "AcrPush"
   scope                = azurerm_container_registry.acr.id
 }
+

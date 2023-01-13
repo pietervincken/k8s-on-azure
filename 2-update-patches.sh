@@ -60,10 +60,10 @@ yq -i ".spec.clientID |= \"$esClientId\"" k8s/external-secrets-operator/resource
 yq -i ".spec.resourceID |= \"$edResourceId\"" k8s/external-dns/resources/azureidentity.yaml 
 yq -i ".spec.clientID |= \"$edClientId\"" k8s/external-dns/resources/azureidentity.yaml 
 
-yq -i ".spec.resourceID |= \"$kanikoResourceId\"" k8s/tekline/resources/tasks/create-namespace-task/kaniko-azureidentity.yaml 
-yq -i ".spec.clientID |= \"$kanikoClientId\"" k8s/tekline/resources/tasks/create-namespace-task/kaniko-azureidentity.yaml 
+yq -i ".spec.resourceID |= \"$kanikoResourceId\"" k8s/tekline/patches/kaniko-azureidentity.yaml 
+yq -i ".spec.clientID |= \"$kanikoClientId\"" k8s/tekline/patches/kaniko-azureidentity.yaml 
 
-yq -i ".[0].value.[\"external-dns.alpha.kubernetes.io/hostname\"] |= \"*.$domain\"" k8s/traefik/patches/service.yaml 
+# yq -i ".[0].value.[\"external-dns.alpha.kubernetes.io/hostname\"] |= \"*.$domain\"" k8s/traefik/patches/service.yaml 
 
 cat <<EOF > k8s/external-dns/secrets/azure.json
 {
