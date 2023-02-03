@@ -5,6 +5,6 @@ metadata:
   annotations:
     aadpodidentity.k8s.io/Behavior: namespaced
 spec:
-  clientID: 148c4d6e-176e-40f5-9097-06e913570c78
+  clientID: 41a6d745-438f-4340-a305-a4cf0f76dea9
   resourceID: /subscriptions/467811c4-023c-4b77-8511-54b5b2eac549/resourceGroups/rg-renovate-talk/providers/Microsoft.ManagedIdentity/userAssignedIdentities/external-dns-operator
   type: 0
