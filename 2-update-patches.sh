@@ -58,6 +58,24 @@ if [ -z $domain ]; then
     exit 1
 fi
 
+
+if [ -z $thanosSa ]; then
+    echo "Could not find thanosSa. Stopping!"
+    exit 1
+fi
+
+
+if [ -z $thanosClientId ]; then
+    echo "Could not find thanosClientId. Stopping!"
+    exit 1
+fi
+
+
+if [ -z $thanosResourceId ]; then
+    echo "Could not find thanosResourceId. Stopping!"
+    exit 1
+fi
+
 yq -i ".spec.resourceID |= \"$esResourceId\"" k8s/external-secrets-operator/resources/azureidentity.yaml 
 yq -i ".spec.clientID |= \"$esClientId\"" k8s/external-secrets-operator/resources/azureidentity.yaml 
 yq -i ".spec.resourceID |= \"$edResourceId\"" k8s/external-dns/resources/azureidentity.yaml 

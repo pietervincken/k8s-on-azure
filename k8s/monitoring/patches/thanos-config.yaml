@@ -3,5 +3,5 @@
   value:
     type: Azure
     config:
-      storage_account:
+      storage_account: "renovatetalkthanos"
       user_assigned_id: /subscriptions/467811c4-023c-4b77-8511-54b5b2eac549/resourceGroups/rg-renovate-talk/providers/Microsoft.ManagedIdentity/userAssignedIdentities/thanos
