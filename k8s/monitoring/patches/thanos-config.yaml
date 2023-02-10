@@ -3,3 +3,7 @@
   value:
     key: thanos.yaml
     name: thanos-config
+
+- op: add
+  path: /spec/template/metadata/labels/aadpodidbinding
+  value: thanos
