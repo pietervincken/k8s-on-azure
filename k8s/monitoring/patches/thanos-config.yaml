@@ -2,7 +2,7 @@
   path: /spec/thanos/objectStorageConfig
   value:
     key: thanos.yaml
-    name: thanos-config
+    name: thanos-objectstorage
 
 - op: add
   path: /spec/template/metadata/labels/aadpodidbinding

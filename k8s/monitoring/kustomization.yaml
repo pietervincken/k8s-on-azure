@@ -5,7 +5,7 @@ resources:
   - https://github.com/pietervincken/renovate-tekton-argo-talk.git//k8s/monitoring?ref=main
 
 secretGenerator:
-  - name: thanos-config
+  - name: thanos-objectstorage
     files:
       - config/thanos.yaml
     options:
