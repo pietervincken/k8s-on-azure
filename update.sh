@@ -12,6 +12,7 @@ get_latest_release() {
 
 # helm repo add aad-pod-identity https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts
 # helm repo add external-secrets https://charts.external-secrets.io
+# helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 
 cd k8s/aad-pod-identity
@@ -30,6 +31,7 @@ kustomize create app --recursive --autodetect
 cd ../../../..
 echo "Upgraded aad-pod-identity"
 
+mkdir -p k8s/external-secrets-operator || true
 cd k8s/external-secrets-operator
 rm -rf resources/render/
 mkdir -p resources/render
@@ -42,7 +44,10 @@ kustomize create app --recursive --autodetect
 cd ../../../..
 echo "Upgraded external-secrets-operator"
 
+mkdir -p k8s/external-dns/ || true
 cd k8s/external-dns/
+rm -rf resources/render/ || true
+mkdir -p resources/render
 externalDNSOperatorVersion=$(get_latest_release "kubernetes-sigs/external-dns")
 git clone -q --depth=1 https://github.com/kubernetes-sigs/external-dns.git --branch $externalDNSOperatorVersion $tempdir/externaldns 2> /dev/null
 rm -rf resources/render
