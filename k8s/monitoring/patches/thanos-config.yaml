@@ -5,5 +5,7 @@
     name: thanos-objectstorage
 
 - op: add
-  path: /metadata/labels/aadpodidbinding
-  value: thanos
+  path: /spec/template/podMetadata
+  value:
+    labels:
+      aadpodidbinding: thanos
