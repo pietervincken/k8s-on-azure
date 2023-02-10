@@ -7,7 +7,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: git@github.com:pietervincken/renovate-tekton-argo-talk.git
+    repoURL: git@github.com:pietervincken/renovate-talk-azure.git
     targetRevision: main
     path: k8s/monitoring
   destination:
