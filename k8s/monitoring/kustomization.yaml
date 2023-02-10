@@ -3,3 +3,15 @@ kind: Kustomization
 
 resources:
   - https://github.com/pietervincken/renovate-tekton-argo-talk.git//k8s/monitoring?ref=main
+
+secretGenerator:
+  - name: thanos-config
+    files:
+      - config/thanos.yaml
+    options:
+      disableNameSuffixHash: true
+
+patches:
+  - target:
+      kind: Prometheus
+    path: patches/thanos-config.yaml

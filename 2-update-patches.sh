@@ -86,8 +86,8 @@ yq -i ".spec.clientID |= \"$kanikoClientId\"" k8s/tekline/config/kaniko-azureide
 
 yq -i ".spec.resourceID |= \"$thanosResourceId\"" k8s/monitoring/resources/thanos-azureidentity.yaml 
 yq -i ".spec.clientID |= \"$thanosClientId\"" k8s/monitoring/resources/thanos-azureidentity.yaml 
-yq -i ".[0].value.config.user_assigned_id |= \"$thanosResourceId\"" k8s/monitoring/patches/thanos-config.yaml 
-yq -i ".[0].value.config.storage_account |= \"$thanosSa\"" k8s/monitoring/patches/thanos-config.yaml 
+yq -i ".config.user_assigned_id |= \"$thanosResourceId\"" k8s/monitoring/config/thanos.yaml 
+yq -i ".config.storage_account |= \"$thanosSa\"" k8s/monitoring/config/thanos.yaml 
 
 # yq -i ".[0].value.[\"external-dns.alpha.kubernetes.io/hostname\"] |= \"*.$domain\"" k8s/traefik/patches/service.yaml 
 
