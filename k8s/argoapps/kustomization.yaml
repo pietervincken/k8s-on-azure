@@ -3,14 +3,18 @@ kind: Kustomization
 resources:
   - resources/aad-pod-identity.yaml
   - resources/certmanager-argoapp.yaml
-  - resources/externaldns-argoapp.yaml
+  - resources/dashboarding-argoapp.yaml
   - resources/external-secrets-operator-argoapp.yaml
+  - resources/externaldns-argoapp.yaml
+  - resources/grafana-operator-argoapp.yaml
+  - resources/monitoring-argoapp.yaml
+  - resources/prometheus-operator-argoapp.yaml
   - resources/renovate-argoapp.yaml
   - resources/tekline-argoapp.yaml
   - resources/tekton-argoapp.yaml
   - resources/traefik-argoapp.yaml
+
   # - https://github.com/pietervincken/renovate-talk-microservice-demo.git//argocd?ref=main
   # - https://github.com/pietervincken/renovate-talk-demo-app.git//argocd?ref=main
-  - https://github.com/pietervincken/renovate-talk-java-demo-app-deploy.git//argocd?ref=main
 
 namespace: argocd
