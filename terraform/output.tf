@@ -22,6 +22,18 @@ output "kaniko_resource_id" {
   value = azurerm_user_assigned_identity.kaniko.id
 }
 
+output "thanos_client_id" {
+  value = azurerm_user_assigned_identity.thanos.client_id
+}
+
+output "thanos_resource_id" {
+  value = azurerm_user_assigned_identity.thanos.id
+}
+
+output "thanos_sa" {
+  value = azurerm_storage_account.thanos.name
+}
+
 output "domain" {
   value = azurerm_dns_zone.domain.name
 }

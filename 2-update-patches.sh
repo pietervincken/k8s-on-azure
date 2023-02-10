@@ -9,6 +9,9 @@ edResourceId=$(cat terraform/output.json| jq --raw-output '.external_dns_resourc
 kanikoClientId=$(cat terraform/output.json| jq --raw-output '.kaniko_client_id.value')
 kanikoResourceId=$(cat terraform/output.json| jq --raw-output '.kaniko_resource_id.value')
 domain=$(cat terraform/output.json| jq --raw-output '.domain.value')
+thanosClientId=$(cat terraform/output.json| jq --raw-output '.thanos_client_id.value')
+thanosResourceId=$(cat terraform/output.json| jq --raw-output '.thanos_resource_id.value')
+thanosSa=$(cat terraform/output.json| jq --raw-output '.thanos_sa.value')
 
 if [ -z $esClientId ]; then
     echo "Could not find esClientId. Stopping!"
@@ -60,8 +63,13 @@ yq -i ".spec.clientID |= \"$esClientId\"" k8s/external-secrets-operator/resource
 yq -i ".spec.resourceID |= \"$edResourceId\"" k8s/external-dns/resources/azureidentity.yaml 
 yq -i ".spec.clientID |= \"$edClientId\"" k8s/external-dns/resources/azureidentity.yaml 
 
-yq -i ".spec.resourceID |= \"$kanikoResourceId\"" k8s/tekline/patches/kaniko-azureidentity.yaml 
-yq -i ".spec.clientID |= \"$kanikoClientId\"" k8s/tekline/patches/kaniko-azureidentity.yaml 
+yq -i ".spec.resourceID |= \"$kanikoResourceId\"" k8s/tekline/config/kaniko-azureidentity.yaml 
+yq -i ".spec.clientID |= \"$kanikoClientId\"" k8s/tekline/config/kaniko-azureidentity.yaml 
+
+yq -i ".spec.resourceID |= \"$thanosResourceId\"" k8s/monitoring/resources/thanos-azureidentity.yaml 
+yq -i ".spec.clientID |= \"$thanosClientId\"" k8s/monitoring/resources/thanos-azureidentity.yaml 
+yq -i ".[0].value.config.user_assigned_id |= \"$thanosResourceId\"" k8s/monitoring/patches/thanos-config.yaml 
+yq -i ".[0].value.config.storage_account |= \"$thanosSa\"" k8s/monitoring/patches/thanos-config.yaml 
 
 # yq -i ".[0].value.[\"external-dns.alpha.kubernetes.io/hostname\"] |= \"*.$domain\"" k8s/traefik/patches/service.yaml 
 

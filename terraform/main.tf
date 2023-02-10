@@ -227,3 +227,22 @@ resource "azurerm_role_assignment" "kaniko_to_acr" {
   scope                = azurerm_container_registry.acr.id
 }
 
+resource "azurerm_storage_account" "thanos" {
+  name                     = replace("${local.name}-thanos", "-", "")
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
+  account_tier             = "Standard"
+  account_replication_type = "GRS"
+}
+
+resource "azurerm_user_assigned_identity" "thanos" {
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  name                = "thanos"
+}
+
+resource "azurerm_role_assignment" "thanos_to_storage_account" {
+  principal_id         = azurerm_user_assigned_identity.thanos.principal_id
+  role_definition_name = "Storage Account Contributor"
+  scope                = azurerm_storage_account.thanos.id
+}

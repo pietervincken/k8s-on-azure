@@ -14,6 +14,6 @@ patches:
 configMapGenerator:
   - name: create-namespace-resources
     files:
-      - patches/kaniko-azureidentity.yaml
-      - patches/kaniko-azureidentitybinding.yaml
+      - config/kaniko-azureidentity.yaml
+      - config/kaniko-azureidentitybinding.yaml
     behavior: merge
