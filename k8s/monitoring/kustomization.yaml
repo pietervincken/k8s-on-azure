@@ -3,6 +3,8 @@ kind: Kustomization
 
 resources:
   - https://github.com/pietervincken/renovate-tekton-argo-talk.git//k8s/monitoring?ref=main
+  - resources/thanos-azureidentity.yaml
+  - resources/thanos-azureidentitybinding.yaml
 
 secretGenerator:
   - name: thanos-objectstorage
