@@ -29,3 +29,4 @@ resources:
 - pushsecrets.external-secrets.io-CustomResourceDefinition.yml
 - secretstore-validate-ValidatingWebhookConfiguration.yml
 - secretstores.external-secrets.io-CustomResourceDefinition.yml
+- vaultdynamicsecrets.generators.external-secrets.io-CustomResourceDefinition.yml
