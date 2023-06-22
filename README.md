@@ -48,5 +48,6 @@ export githubtrigger="xxx" # Token used to validate push webhooks from Github.
 
 ## TODO
 
-- (Optional) Deploy Prometheus/Thanos
+- (Optional) Deploy Prometheus/Thanos (WIP)
+- (Optional) Fix Grafana (WIP)
 - (Optional) Setup SSH key for Tekline remote pipeline tasks
