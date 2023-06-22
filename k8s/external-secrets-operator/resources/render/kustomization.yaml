@@ -16,6 +16,7 @@ resources:
 - external-secrets-edit-ClusterRole.yml
 - external-secrets-leaderelection-Role.yml
 - external-secrets-leaderelection-RoleBinding.yml
+- external-secrets-servicebindings-ClusterRole.yml
 - external-secrets-view-ClusterRole.yml
 - external-secrets-webhook-Deployment.yml
 - external-secrets-webhook-Secret.yml
