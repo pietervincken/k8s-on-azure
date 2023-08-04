@@ -6,8 +6,7 @@ resources:
   # - resources/thanos-azureidentity.yaml
   # - resources/thanos-azureidentitybinding.yaml
 
-# thanos is currently broken.
-
+# thanos-store is currently broken.
 # secretGenerator:
 #   - name: thanos-objectstorage
 #     files:
