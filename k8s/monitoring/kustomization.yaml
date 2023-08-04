@@ -17,3 +17,8 @@ patches:
   - target:
       kind: Prometheus
     path: patches/thanos-config.yaml
+
+  - target:
+      kind: StatefulSet
+      name: thanos-store
+    path: patches/thanos-store-aad.yaml
