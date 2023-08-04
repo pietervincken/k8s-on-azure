@@ -80,11 +80,11 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   default_node_pool {
     zones               = [3]
     enable_auto_scaling = false
-    vm_size             = "standard_b2s"
+    vm_size             = "standard_b2ms"
     name                = "default"
     os_sku              = "Ubuntu" # TODO explorer AzureLinux
 
-    node_count = 4
+    node_count = 3
 
     temporary_name_for_rotation = "tempdefault"
   }
