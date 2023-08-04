@@ -28,5 +28,3 @@ resources:
 replicas:
   - name: thanos-store
     count: 0
-  - name: thanos-query
-    count: 0
