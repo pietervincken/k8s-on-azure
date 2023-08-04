@@ -1,4 +1,4 @@
 - op: add
-  path: /spec/template/metadate/labels
+  path: /spec/template/metadata/labels
   value:
     aadpodidbinding: thanos
