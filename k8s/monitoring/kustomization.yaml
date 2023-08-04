@@ -3,22 +3,30 @@ kind: Kustomization
 
 resources:
   - https://github.com/pietervincken/renovate-tekton-argo-talk.git//k8s/monitoring?ref=main
-  - resources/thanos-azureidentity.yaml
-  - resources/thanos-azureidentitybinding.yaml
+  # - resources/thanos-azureidentity.yaml
+  # - resources/thanos-azureidentitybinding.yaml
 
-secretGenerator:
-  - name: thanos-objectstorage
-    files:
-      - config/thanos.yaml
-    options:
-      disableNameSuffixHash: true
+# thanos is currently broken.
 
-patches:
-  - target:
-      kind: Prometheus
-    path: patches/thanos-config.yaml
+# secretGenerator:
+#   - name: thanos-objectstorage
+#     files:
+#       - config/thanos.yaml
+#     options:
+#       disableNameSuffixHash: true
 
-  - target:
-      kind: StatefulSet
-      name: thanos-store
-    path: patches/thanos-store-aad.yaml
+# patches:
+# - target:
+#     kind: Prometheus
+#   path: patches/thanos-config.yaml
+
+# - target:
+#     kind: StatefulSet
+#     name: thanos-store
+#   path: patches/thanos-store-aad.yaml
+
+replicas:
+  - name: thanos-store
+    count: 0
+  - name: thanos-query
+    count: 0
