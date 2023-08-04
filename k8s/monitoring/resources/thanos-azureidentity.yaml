@@ -5,6 +5,6 @@ metadata:
   annotations:
     aadpodidentity.k8s.io/Behavior: namespaced
 spec:
-  clientID: a03102f9-9f15-4732-9ac3-22e290c698e5
+  clientID: f0c60e01-0b4d-4b7b-8366-39f358764fb2
   resourceID: /subscriptions/467811c4-023c-4b77-8511-54b5b2eac549/resourceGroups/rg-renovate-talk/providers/Microsoft.ManagedIdentity/userAssignedIdentities/thanos
   type: 0
