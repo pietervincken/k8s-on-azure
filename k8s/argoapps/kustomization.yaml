@@ -4,9 +4,11 @@ resources:
   - resources/aad-pod-identity.yaml
   - resources/certmanager-argoapp.yaml
   - resources/dashboarding-argoapp.yaml
+  - resources/elastic-operator-argoapp.yaml
   - resources/external-secrets-operator-argoapp.yaml
   - resources/externaldns-argoapp.yaml
   - resources/grafana-operator-argoapp.yaml
+  - resources/logging-argoapp.yaml
   - resources/monitoring-argoapp.yaml
   - resources/prometheus-operator-argoapp.yaml
   - resources/renovate-argoapp.yaml

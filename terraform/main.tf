@@ -77,14 +77,16 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   dns_prefix          = local.name
   kubernetes_version  = "1.26.3"
 
-
   default_node_pool {
     zones               = [3]
-    node_count          = 3
     enable_auto_scaling = false
     vm_size             = "standard_b2s"
     name                = "default"
-    os_sku              = "Ubuntu"
+    os_sku              = "Ubuntu" # TODO explorer AzureLinux
+
+    node_count = 4
+
+    temporary_name_for_rotation = "tempdefault"
   }
 
   azure_active_directory_role_based_access_control {
@@ -97,6 +99,29 @@ resource "azurerm_kubernetes_cluster" "cluster" {
 
   tags = local.common_tags
 }
+
+## TODO add correct labels and tolerations to workloads!
+# resource "azurerm_kubernetes_cluster_node_pool" "spot" {
+#   name                  = "spot"
+#   kubernetes_cluster_id = azurerm_kubernetes_cluster.cluster.id
+#   vm_size               = "Standard_DS2_v2"
+#   enable_auto_scaling   = true
+
+#   min_count  = 1
+#   max_count  = 10
+#   node_count = 1
+
+#   spot_max_price = -1
+
+#   priority        = "Spot"
+#   eviction_policy = "Delete"
+
+#   lifecycle {
+#     ignore_changes = [node_count]
+#   }
+
+#   tags = local.common_tags
+# }
 
 data "azuread_user" "user" {
   user_principal_name = local.upn

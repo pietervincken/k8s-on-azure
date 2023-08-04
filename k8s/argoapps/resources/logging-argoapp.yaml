@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: elastic-operator
+  name: logging
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
 spec:
@@ -9,13 +9,11 @@ spec:
   source:
     repoURL: git@github.com:pietervincken/renovate-tekton-argo-talk.git
     targetRevision: main
-    path: k8s/elastic-operator
+    path: k8s/logging
   destination:
     server: https://kubernetes.default.svc
-    namespace: elastic-operator
+    namespace: logging
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - ServerSideApply=true
