@@ -12,7 +12,7 @@ spec:
     path: k8s/elastic-operator
   destination:
     server: https://kubernetes.default.svc
-    namespace: elastic-operator
+    namespace: elastic-system
   syncPolicy:
     automated:
       prune: true
